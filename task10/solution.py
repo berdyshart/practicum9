@@ -1,19 +1,6 @@
 result = ''
 counter = 0
-days_in_months = {
-    1: 31,
-    2: 28,
-    3: 31,
-    4: 30,
-    5: 31,
-    6: 30,
-    7: 31,
-    8: 31,
-    9: 30,
-    10: 31,
-    11: 30,
-    12: 31
-}
+days_in_months_list = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 with open('input.txt', 'r', encoding='utf-8') as f_in:
     lines = f_in.readlines()
@@ -34,12 +21,10 @@ with open('input.txt', 'r', encoding='utf-8') as f_in:
         elif current_month - month > 1:
             result += cell_id + '\n'
         else:
-            try:
-                days_cell_occup = current_day + (days_in_months[month] - day)
-                if days_cell_occup > 3:
-                    result += cell_id + '\n'
-            except KeyError:
-                print(month, day)
+            days_in_month = days_in_months_list[month]
+            days_cell_occup = current_day + (days_in_month - day)
+            if days_cell_occup > 3:
+                result += cell_id + '\n'
 
 with open('output.txt', 'w', encoding='utf-8') as f_out:
     f_out.write(result)
